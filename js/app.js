@@ -10,3 +10,10 @@
   game = new Game()
   game.startGame()
  })
+
+ keyboard.addEventListener('click', (e) => {
+  if (e.target.tagName === 'BUTTON') {
+    game.handleInteraction(e.target)
+  }
+  
+ })
