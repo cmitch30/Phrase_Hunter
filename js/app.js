@@ -17,3 +17,11 @@
   }
   
  })
+
+ document.addEventListener("keyup", (e) => {
+   for (let btn of keys) {
+     if (btn.innerHTML === e.key) {
+       game.handleInteraction(btn);
+     }
+   }
+ });

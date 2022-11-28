@@ -24,21 +24,30 @@ class Game {
   }
 
   startGame() {
+    container.innerHTML = ''
+    for (const key of keys) {
+      key.disabled = false;
+      key.classList = 'key'
+    }
+       this.missed = 0;
+       for (let heart of hearts) {
+         heart.src = "images/liveHeart.png";
+       }
     overlay.style.display = "none";
     this.activePhrase = this.getRandomPhrase();
     this.activePhrase.addPhraseToDisplay();
   }
 
   handleInteraction(btn) {
-    if (this.activePhrase.checkLetter(btn.innerHtml) === true) {
-      btn.disabled = true;
-      btn.classList.add("chosen");
-      this.activePhrase.showMatchedLetter(btn.innerHtml);
-      this.checkForWin();
-    } else {
-      btn.classList.add("wrong");
-      this.removeLife();
-    }
+        btn.disabled = true;
+        if (this.activePhrase.checkLetter(btn.innerHTML)) {
+          btn.classList.add("chosen");
+          this.activePhrase.showMatchedLetter(btn.innerHTML);
+          this.checkForWin();
+        } else {
+          btn.classList.add("wrong");
+          this.removeLife();
+        }
   }
 
   checkForWin() {
@@ -57,13 +66,24 @@ class Game {
   }
 
   removeLife() {
+    hearts[hearts.length - 1 - this.missed].src = "images/lostHeart.png";
     this.missed++;
-    if (this.missed >= 5) {
+    if (this.missed === 5) {
       this.gameOver("lose");
-    } else {
-      hearts[hearts.length - this.missed].src = "./images/lostHeart.png";
     }
   }
 
-  gameOver() {}
+  gameOver(result) {
+            const gameOverMessage = document.getElementById('game-over-message');
+        overlay.style.display = 'flex';
+        if (result === 'win') {
+            gameOverMessage.innerHTML = "Congrats, you won!";
+            overlay.classList = 'win';
+        } else if (result === 'lose') {
+            gameOverMessage.innerHTML = "You lost, try again!";
+            overlay.classList = 'lose';
+        }
+    }
+  
+
 }

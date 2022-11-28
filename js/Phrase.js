@@ -4,7 +4,7 @@
 
 class Phrase {
   constructor(phrase) {
-    this.phrase = phrase;
+    this.phrase = phrase.toLowerCase();
   }
 
   addPhraseToDisplay() {
@@ -25,13 +25,13 @@ class Phrase {
   }
 
   showMatchedLetter(letter) {
-    const list = document.querySelectorAll("li");
 
-    for (let i = 0; i < list.length; i++) {
-      const char = selectLi[i];
+    for (let i = 0; i < container.children.length; i++) {
+      const char = container.children[i];
       if (char.innerHTML === letter) {
         char.classList.replace("hide", "show");
       }
     }
   }
 }
+
