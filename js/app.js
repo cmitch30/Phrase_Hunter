@@ -25,3 +25,14 @@
      }
    }
  });
+
+ function getRndColor() {
+   return "hsl(" + 360 * Math.random() + ",50%,50%)";
+ }
+
+ const printQuote = () => {
+  let body = document.querySelector('body')
+  body.style.backgroundColor = getRndColor();
+ }
+
+ setInterval(printQuote, 10000);
